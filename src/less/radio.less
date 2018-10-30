@@ -1,0 +1,41 @@
+@color--radio: #50bccb;
+@color--border: #8d8d8d;
+@color--danger: #df4012;
+@font-size--xsmall: 12px;
+
+.radio {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.radio__element {
+  z-index: 1;
+
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  padding: 5px;
+  vertical-align: text-top;
+
+  background: white content-box;
+  border: 1px solid @color--border;
+  border-radius: 100%;
+  transition: all .3s ease;
+
+  .radio__input:checked + & {
+    border-color: @color--radio;
+    background-color: @color--radio;
+  }
+}
+
+.radio__input {
+  display: none;
+}
+
+.form-item__error {
+  padding: 3px 3px 0;
+  color: @color--danger;
+  font-size: @font-size--xsmall;
+  line-height: 1.1;
+}

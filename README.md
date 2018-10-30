@@ -1,26 +1,118 @@
-# form-radio
+# @odyzeo/form-radio
 
-## Project setup
-```
-yarn install
-```
+Simple input and textarea Vue.js component.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+## Installation
 
-### Compiles and minifies for production
+### npm
+
 ```
-yarn run build
+npm install --save @odyzeo/form-radio
 ```
 
-### Run your tests
+### yarn
+
 ```
-yarn run test
+yarn add @odyzeo/form-radio
 ```
 
-### Lints and fixes files
+Import component in your where you want to use it and register it:
+
 ```
-yarn run lint
+import 'FormRadio' from '@odyzeo/form-radio';
+export default {
+  components: { FormRadio },
+}
+```
+
+Import styles or make your own.
+
+```
+import '@odyzeo/form-radio/dist/form-radio.css';
+```
+
+## Usage
+
+```
+<template>
+  <h1>Which platform do you prefer?</h1>
+  <form-radio
+    :ref="radio.name"
+    :input="radio"
+    @input="selected = $event"
+  />
+</template>
+```
+
+```
+<script>
+import FormRadio from '@odyzeo/form-radio'
+
+export default {
+  name: 'App',
+  components: {
+    FormRadio,
+  },
+  data() {
+    return {
+      selected: '',
+      radio: {
+        name: 'platform',
+        required: true,
+        options: [
+          {
+            value: 'ios',
+            name: 'iOS',
+          },
+          {
+            value: 'android',
+            name: 'Android',
+          },
+          {
+            value: 'windows',
+            name: 'Windows Phone',
+          },
+        ],
+      },
+    };
+  },
+};
+</script>
+```
+
+## Props
+
+### input - required
+| property name | type | description |
+| --- | --- | --- |
+| type | string | 'radio' |
+| name | string | name attribute |
+| required | boolean | if value is required |
+| options | array | array of radio options [{ value: 'value', name: 'name' }] |
+
+### field - optional
+Name of option property, default is 'value'.
+
+### value - optional
+This is the initial value of the form radio.
+
+### formErrors - optional
+Use to display errors from your server/api.
+
+## Events
+Component emits 'input' event with value of the element
+
+## CSS classes
+*TODO*
+
+## Development
+
+```
+npm run serve
+```
+
+or
+
+```bash
+yarn serve
 ```

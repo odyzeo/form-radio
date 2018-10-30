@@ -1,13 +1,38 @@
 {
-  "name": "form-radio",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@odyzeo/form-radio",
+  "version": "1.0.0",
+  "description": "Odyzeo form radio component with Vue",
+  "main": "dist/form-radio.umd.js",
+  "keywords": [
+    "odyzeo",
+    "form",
+    "radio",
+    "vue"
+  ],
+  "author": "Odyzeo <tomas.zamba@odyzeo.com, peter.baricic@odyzeo.com> (https://odyzeo.com)",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-lib": "vue-cli-service build --target lib --name form-radio ./src/components/FormRadio.vue",
     "lint": "vue-cli-service lint"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/odyzeo/form-radio.git"
+  },
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    ".js"
+  ],
   "dependencies": {
+    "normalize.css": "^8.0.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -25,10 +50,12 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/recommended",
       "@vue/airbnb"
     ],
-    "rules": {},
+    "rules": {
+      "no-underscore-dangle": 0
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }
