@@ -85,7 +85,6 @@ export default {
 ### input - required
 | property name | type | description |
 | --- | --- | --- |
-| type | string | 'radio' |
 | name | string | name attribute |
 | required | boolean | if value is required |
 | options | array | array of radio options [{ value: 'value', name: 'name' }] |
