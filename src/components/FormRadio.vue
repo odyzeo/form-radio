@@ -113,5 +113,6 @@ export default {
 </script>
 
 <style lang="less">
+@import '../less/form-item.less';
 @import '../less/radio.less';
 </style>
