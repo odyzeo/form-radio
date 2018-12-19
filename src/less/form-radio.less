@@ -1,15 +1,15 @@
-@color--radio: #50bccb;
+@color--form-radio: #50bccb;
 @color--border: #8d8d8d;
 @color--danger: #df4012;
 @font-size--xsmall: 12px;
 
-.radio {
+.form-radio {
   position: relative;
   display: block;
   cursor: pointer;
 }
 
-.radio__element {
+.form-radio__element {
   z-index: 1;
 
   display: inline-block;
@@ -23,12 +23,12 @@
   border-radius: 100%;
   transition: all .3s ease;
 
-  .radio__input:checked + & {
-    border-color: @color--radio;
-    background-color: @color--radio;
+  .form-radio__input:checked + & {
+    border-color: @color--form-radio;
+    background-color: @color--form-radio;
   }
 }
 
-.radio__input {
+.form-radio__input {
   display: none;
 }

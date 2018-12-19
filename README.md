@@ -19,9 +19,11 @@ yarn add @odyzeo/form-radio
 Import component in your where you want to use it and register it:
 
 ```
-import 'FormRadio' from '@odyzeo/form-radio';
+import FormRadio from '@odyzeo/form-radio';
 export default {
-  components: { FormRadio },
+  components: {
+    FormRadio,
+  },
 }
 ```
 
@@ -88,7 +90,6 @@ export default {
 | `required` | boolean | `false` | If value is required |
 | `options` | array | | Array of radio options [{ value: 'value', name: 'name' }] |
 | `field` | string | `value` | Name of option property. |
-| `form-erros` | object, array | | Array of errors to display |
 
 ### field {string} - optional
 Name of option property. Default: `value`.

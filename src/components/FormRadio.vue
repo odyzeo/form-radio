@@ -5,29 +5,27 @@
       'form-item--error': isErrorClass,
     }"
   >
-    <div
-      class="form__radio"
+    <label
+      class="form-radio"
       v-for="(option, key) in input.options"
       :key="`${input.name}_option_${key}`"
     >
-      <label class="radio">
-        <input
-          type="radio"
-          class="radio__input"
-          ref="input"
-          :value="option[field]"
-          :id="uid"
-          :name="input.name"
-          :checked="value == option[field]"
-          @change="change(option[field])"
-        >
-        <span class="radio__element"></span>
+      <input
+        type="radio"
+        class="form-radio__input"
+        ref="input"
+        :value="option[field]"
+        :id="uid"
+        :name="input.name"
+        :checked="value == option[field]"
+        @change="change(option[field])"
+      >
+      <span class="form-radio__element"></span>
 
-        <span class="radio__text">
+      <span class="form-radio__text">
           {{ option.name }}
         </span>
-      </label>
-    </div>
+    </label>
     <div
       class="form-item__error"
       v-for="(error, key) in errors"
@@ -113,6 +111,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '../less/form-item.less';
-@import '../less/radio.less';
+@import '../less/form-radio.less';
 </style>
