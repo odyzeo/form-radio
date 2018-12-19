@@ -1,6 +1,6 @@
 # @odyzeo/form-radio
 
-Simple input and textarea Vue.js component.
+Simple input radio Vue.js component.
 
 ## Installation
 
@@ -35,12 +35,11 @@ import '@odyzeo/form-radio/dist/form-radio.css';
 
 ```
 <template>
-  <h1>Which platform do you prefer?</h1>
   <form-radio
-    :ref="radio.name"
     :input="radio"
-    @input="selected = $event"
-  />
+    v-model="radio.value"
+    :form-errors="formErrors[radio.name]"
+  ></form-radio>
 </template>
 ```
 
@@ -55,10 +54,10 @@ export default {
   },
   data() {
     return {
-      selected: '',
+      formErrors: {},
       radio: {
         name: 'platform',
-        required: true,
+        value: 'android',
         options: [
           {
             value: 'ios',
@@ -83,26 +82,25 @@ export default {
 ## Props
 
 ### input - required
-| property name | type | description |
-| --- | --- | --- |
-| name | string | name attribute |
-| required | boolean | if value is required |
-| options | array | array of radio options [{ value: 'value', name: 'name' }] |
+| Property name | Type | Default value | Description |
+| ------------- | ---- | ------------- | ----------- |
+| `name` | string | | Input `name` attribute |
+| `required` | boolean | `false` | If value is required |
+| `options` | array | | Array of radio options [{ value: 'value', name: 'name' }] |
+| `field` | string | `value` | Name of option property. |
+| `form-erros` | object, array | | Array of errors to display |
 
-### field - optional
-Name of option property, default is 'value'.
+### field {string} - optional
+Name of option property. Default: `value`.
 
-### value - optional
-This is the initial value of the form radio.
+### value {string} - optional
+This is the initial value of the form input radio.
 
-### formErrors - optional
-Use to display errors from your server/api.
+### formErrors {array} - optional
+Array of errors to display.
 
 ## Events
 Component emits 'input' event with value of the element
-
-## CSS classes
-*TODO*
 
 ## Development
 

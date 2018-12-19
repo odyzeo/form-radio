@@ -10,15 +10,21 @@
       >
         <h1>Which platform do you prefer?</h1>
         <form-radio
-          :ref="radio.name"
           :input="radio"
-        />
-        <input
-          class="btn-validate"
-          type="submit"
-          value="Show selected values">
+          v-model="radio.value"
+          :form-errors="formErrors[radio.name]"
+        ></form-radio>
+
+        <p></p>
+
+        {{radio.name}}: {{radio.value}}
+
+        <p></p>
+
+        <button class="btn-validate">
+          Send
+        </button>
       </form>
-      <pre v-if="values">{{ values }}</pre>
     </div>
   </div>
 </template>
@@ -33,9 +39,11 @@ export default {
   },
   data() {
     return {
+      formErrors: {},
       radio: {
         name: 'platform',
         required: true,
+        value: 'android',
         options: [
           {
             value: 'ios',
@@ -51,22 +59,13 @@ export default {
           },
         ],
       },
-      values: null,
     };
   },
   methods: {
     submit() {
-      const item = this.$refs[this.radio.name];
-      if (item && item.validate) {
-        item.validate();
-        if (item.errors.length) return;
+      this.formErrors = {
+        platform: ['Are you sure?']
       }
-
-      const formData = new FormData(this.$refs.form);
-      this.values = Array.from(formData.entries()).reduce((memo, pair) => ({
-        ...memo,
-        [pair[0]]: pair[1],
-      }), {});
     },
   },
 };

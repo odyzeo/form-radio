@@ -1,46 +1,46 @@
 <template>
   <div
-    :class="{
-      'form-item--error': errors.length || (formErrors.length && showFormErrors),
-    }"
     class="form-item"
+    :class="{
+      'form-item--error': isErrorClass,
+    }"
   >
     <div
+      class="form__radio"
       v-for="(option, key) in input.options"
       :key="`${input.name}_option_${key}`"
-      class="form__radio"
     >
       <label class="radio">
         <input
-          ref="input"
-          :id="uid"
-          :name="input.name"
-          :value="option[field]"
-          :checked="value == option[field]"
-          v-model="localValue"
           type="radio"
           class="radio__input"
-          @input="change(option[field])"
+          ref="input"
+          :value="option[field]"
+          :id="uid"
+          :name="input.name"
+          :checked="value == option[field]"
+          @change="change(option[field])"
         >
-        <span class="radio__element" />
+        <span class="radio__element"></span>
+
         <span class="radio__text">
           {{ option.name }}
         </span>
       </label>
     </div>
     <div
+      class="form-item__error"
       v-for="(error, key) in errors"
       :key="`fe_error_${key}`"
-      class="form-item__error"
       v-html="error"
-    />
+    ></div>
     <div v-if="showFormErrors">
       <div
+        class="form-item__error"
         v-for="(error, key) in formErrors"
         :key="`be_error_${key}`"
-        class="form-item__error"
         v-html="error"
-      />
+      ></div>
     </div>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
       required: true,
     },
     formErrors: {
-      type: Array,
+      type: [Array, Object],
       default: () => [],
     },
     field: {
@@ -75,6 +75,9 @@ export default {
   computed: {
     uid() {
       return `form-item-${this._uid}`;
+    },
+    isErrorClass() {
+      return this.errors.length || (this.formErrors.length && this.showFormErrors);
     },
   },
   watch: {
