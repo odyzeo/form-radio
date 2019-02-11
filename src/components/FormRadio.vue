@@ -22,9 +22,11 @@
       >
       <span class="form-radio__element"></span>
 
-      <span class="form-radio__text">
-          {{ option.name }}
-        </span>
+      <slot name="option" :option="option">
+          <span class="form-radio__text">
+            {{ option.name }}
+          </span>
+      </slot>
     </label>
     <div
       class="form-item__error"

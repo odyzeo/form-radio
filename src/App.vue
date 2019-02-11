@@ -13,13 +13,17 @@
           :input="radio"
           v-model="radio.value"
           :form-errors="formErrors[radio.name]"
-        ></form-radio>
+        >
+          <template #option="{ option }">
+            <span class="form-radio__text">
+              {{ option.name }}
+            </span>
+          </template>
+        </form-radio>
 
-        <p></p>
-
-        {{radio.name}}: {{radio.value}}
-
-        <p></p>
+        <p>
+          {{ radio.name }}: {{ radio.value }}
+        </p>
 
         <button class="btn-validate">
           Send
@@ -64,8 +68,8 @@ export default {
   methods: {
     submit() {
       this.formErrors = {
-        platform: ['Are you sure?']
-      }
+        platform: ['Are you sure?'],
+      };
     },
   },
 };

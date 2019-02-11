@@ -100,6 +100,18 @@ This is the initial value of the form input radio.
 ### formErrors {array} - optional
 Array of errors to display.
 
+## Slots
+Using new slot syntax since 2.6.0+. [Check it out](https://vuejs.org/v2/guide/components-slots.html).
+
+### option
+```vue
+<template #option="{ option }">
+  <span class="form-radio__text">
+    {{ option.name }}
+  </span>
+</template>
+```
+
 ## Events
 Component emits 'input' event with value of the element
 
