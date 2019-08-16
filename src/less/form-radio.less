@@ -4,31 +4,42 @@
 @font-size--xsmall: 12px;
 
 .form-radio {
-  position: relative;
-  display: block;
-  cursor: pointer;
+    position: relative;
+    display: block;
+    cursor: pointer;
 }
 
 .form-radio__element {
-  z-index: 1;
+    z-index: 1;
 
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  padding: 5px;
-  vertical-align: text-top;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    vertical-align: text-top;
 
-  background: white content-box;
-  border: 1px solid @color--border;
-  border-radius: 100%;
-  transition: all .3s ease;
+    background: white content-box;
+    border: 1px solid @color--border;
+    border-radius: 100%;
+    transition: all .3s ease;
 
-  .form-radio__input:checked + & {
-    border-color: @color--form-radio;
-    background-color: @color--form-radio;
-  }
+    .form-radio__input:checked + & {
+        border-color: @color--form-radio;
+        background-color: @color--form-radio;
+    }
 }
 
 .form-radio__input {
-  display: none;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+
+.form-radio {
+
+    &.is-disabled,
+    &.is-readonly {
+        opacity: .4;
+    }
 }

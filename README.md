@@ -2,6 +2,8 @@
 
 Simple input radio Vue.js component.
 
+<a href="https://form-radio-kfdsodka0.now.sh" target="_blank">Demo</a>
+
 ## Installation
 
 ### npm
@@ -21,9 +23,9 @@ Import component in your where you want to use it and register it:
 ```
 import FormRadio from '@odyzeo/form-radio';
 export default {
-  components: {
-    FormRadio,
-  },
+    components: {
+        FormRadio,
+    },
 }
 ```
 
@@ -37,46 +39,56 @@ import '@odyzeo/form-radio/dist/form-radio.css';
 
 ```
 <template>
-  <form-radio
-    :input="radio"
-    v-model="radio.value"
-    :form-errors="formErrors[radio.name]"
-  ></form-radio>
+    <form-radio
+        :input="radio"
+        v-model="radio.value"
+    ></form-radio>
 </template>
 ```
 
 ```
 <script>
-import FormRadio from '@odyzeo/form-radio'
+import FormRadio from './components/FormRadio';
 
 export default {
-  name: 'App',
-  components: {
-    FormRadio,
-  },
-  data() {
-    return {
-      formErrors: {},
-      radio: {
-        name: 'platform',
-        value: 'android',
-        options: [
-          {
-            value: 'ios',
-            name: 'iOS',
-          },
-          {
-            value: 'android',
-            name: 'Android',
-          },
-          {
-            value: 'windows',
-            name: 'Windows Phone',
-          },
-        ],
-      },
-    };
-  },
+    name: 'App',
+    components: {
+        FormRadio,
+    },
+    data() {
+        return {
+            formErrors: {},
+            radio: {
+                name: 'platform',
+                required: true,
+                value: 'zeo',
+                options: [
+                    {
+                        value: 'ios',
+                        name: 'iOS',
+                    },
+                    {
+                        value: 'android',
+                        name: 'Android',
+                    },
+                    {
+                        value: 'windows',
+                        name: 'Windows Phone',
+                    },
+                    {
+                        value: 'ie',
+                        name: 'IE',
+                        disabled: true,
+                    },
+                    {
+                        value: 'zeo',
+                        name: 'Zeo',
+                        readonly: true,
+                    },
+                ],
+            },
+        };
+    },
 };
 </script>
 ```
@@ -88,7 +100,7 @@ export default {
 | ------------- | ---- | ------------- | ----------- |
 | `name` | string | | Input `name` attribute |
 | `required` | boolean | `false` | If value is required |
-| `options` | array | | Array of radio options [{ value: 'value', name: 'name' }] |
+| `options` | array | | Array of radio options [{ value: 'value', name: 'name', disabled: false }] |
 | `field` | string | `value` | Name of option property. |
 
 ### field {string} - optional
@@ -106,9 +118,9 @@ Using new slot syntax since 2.6.0+. [Check it out](https://vuejs.org/v2/guide/co
 ### option
 ```vue
 <template #option="{ option }">
-  <span class="form-radio__text">
-    {{ option.name }}
-  </span>
+    <span class="form-radio__text">
+        {{ option.name }}
+    </span>
 </template>
 ```
 
