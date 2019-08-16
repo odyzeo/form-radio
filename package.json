@@ -1,6 +1,6 @@
 {
     "name": "@odyzeo/form-radio",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "description": "Odyzeo form radio component with Vue",
     "main": "dist/form-radio.umd.js",
     "keywords": [
