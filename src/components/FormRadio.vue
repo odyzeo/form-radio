@@ -13,12 +13,13 @@
                 'is-readonly': option.readonly,
             }"
             :key="`${input.name}_option_${key}`"
+            :for="`${uid}-${option[field]}`"
             class="form-radio"
         >
             <input
                 ref="input"
                 :value="option[field]"
-                :id="uid"
+                :id="`${uid}-${option[field]}`"
                 :name="input.name"
                 :checked="value == option[field]"
                 :disabled="option.disabled"
