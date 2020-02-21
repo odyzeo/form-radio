@@ -101,7 +101,6 @@ export default {
 | `name` | string | | Input `name` attribute |
 | `required` | boolean | `false` | If value is required |
 | `options` | array | | Array of radio options [{ value: 'value', name: 'name', disabled: false }] |
-| `field` | string | `value` | Name of option property. |
 
 ### field {string} - optional
 Name of option property. Default: `value`.

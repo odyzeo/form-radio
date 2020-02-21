@@ -11,17 +11,17 @@
                 'form-item--error': isErrorClass,
                 'is-disabled': option.disabled,
                 'is-readonly': option.readonly,
+                'is-active': isActive(option),
             }"
             :key="`${input.name}_option_${key}`"
-            :for="`${uid}-${option[field]}`"
             class="form-radio"
+            @click="preventWhenReadonly($event, option)"
         >
             <input
                 ref="input"
                 :value="option[field]"
-                :id="`${uid}-${option[field]}`"
                 :name="input.name"
-                :checked="value == option[field]"
+                :checked="isActive(option)"
                 :disabled="option.disabled"
                 :readonly="option.readonly"
                 type="radio"
@@ -83,12 +83,11 @@ export default {
         };
     },
     computed: {
-        uid() {
-            // eslint-disable-next-line
-            return `form-item-${this._uid}`;
-        },
         isErrorClass() {
             return this.errors.length || (this.formErrors.length && this.showFormErrors);
+        },
+        isActive() {
+            return option => this.value === option[this.field];
         },
     },
     watch: {
@@ -118,9 +117,14 @@ export default {
                 });
             }
         },
-        change(v) {
+        preventWhenReadonly(event, option) {
+            if (option.readonly) {
+                event.preventDefault();
+            }
+        },
+        change(value) {
             this.showFormErrors = false;
-            this.$emit('input', v);
+            this.$emit('input', value);
         },
     },
 };
