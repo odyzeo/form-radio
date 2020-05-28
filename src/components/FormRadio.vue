@@ -79,7 +79,7 @@ export default {
         return {
             localValue: this.value || null,
             errors: [],
-            showFormErrors: false,
+            showFormErrors: (this.formErrors.length > 0),
         };
     },
     computed: {
