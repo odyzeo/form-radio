@@ -2,7 +2,7 @@
 
 Simple input radio Vue.js component.
 
-<a href="https://form-radio-kfdsodka0.now.sh" target="_blank">Demo</a>
+<a href="https://form-radio-durmstrangd.vercel.app/" target="_blank">Demo</a>
 
 ## Installation
 
