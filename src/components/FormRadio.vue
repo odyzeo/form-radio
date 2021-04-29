@@ -1,19 +1,20 @@
 <template>
     <div
         :class="{
-            'form-item--error': isErrorClass,
+            'form-item--error': isErrors,
         }"
         class="form-item"
     >
         <label
             v-for="(option, key) in input.options"
+            :key="`${input.name}_option_${key}`"
             :class="{
-                'form-item--error': isErrorClass,
+                [option.className]: option.className,
+                'form-item--error': isErrors,
                 'is-disabled': option.disabled,
                 'is-readonly': option.readonly,
                 'is-active': isActive(option),
             }"
-            :key="`${input.name}_option_${key}`"
             class="form-radio"
             @click="preventWhenReadonly($event, option)"
         >
@@ -26,105 +27,100 @@
                 :readonly="option.readonly"
                 type="radio"
                 class="form-radio__input"
-                @change="change(option[field])"
+                @click="click(option[field])"
+                @change="change($event, option[field])"
             >
             <span class="form-radio__element"></span>
 
             <slot
                 :option="option"
-                name="option">
-                <span class="form-radio__text">
-                    {{ option.name }}
-                </span>
+                name="option"
+            >
+                <span
+                    class="form-radio__text"
+                    v-text="translate(option.name)"
+                ></span>
             </slot>
         </label>
-        <div
-            v-for="(error, key) in errors"
-            :key="`fe_error_${key}`"
-            class="form-item__error"
-            v-html="error"
-        ></div>
-        <div v-if="showFormErrors">
-            <div
-                v-for="(error, key) in formErrors"
-                :key="`be_error_${key}`"
-                class="form-item__error"
-                v-html="error"
-            ></div>
-        </div>
+
+        <form-errors
+            v-if="showFormErrors"
+            :form-errors="formErrors"
+        ></form-errors>
+        <form-errors
+            v-else
+            :form-errors="errors"
+        ></form-errors>
     </div>
 </template>
 
 <script>
+import { FormErrors, FormItem } from '@odyzeo/form-item';
+
 export default {
+    components: { FormErrors },
+    extends: FormItem,
     props: {
-        input: {
-            type: Object,
-            required: true,
-        },
-        formErrors: {
-            type: [Array, Object],
-            default: () => [],
-        },
         field: {
             type: String,
             default: 'value',
         },
-        value: {
-            type: [String, Number],
-            default: null,
-        },
     },
     data() {
         return {
-            localValue: this.value || null,
             errors: [],
-            showFormErrors: (this.formErrors.length > 0),
+            localValue: '',
         };
     },
     computed: {
-        isErrorClass() {
-            return this.errors.length || (this.formErrors.length && this.showFormErrors);
-        },
         isActive() {
-            return option => this.value === option[this.field];
+            return (option) => this.localValue === option[this.field];
+        },
+        isEmpty() {
+            return this.localValue == null || this.localValue === '';
+        },
+        isErrors() {
+            return this.errors.length > 0;
+        },
+        isRequired() {
+            return this.input.required || this.validator('required');
         },
     },
     watch: {
-        localValue() {
-            this.validate();
-        },
-        value(o, n) {
+        value(n) {
             this.localValue = n;
-            if (typeof o !== 'undefined' && n !== o) {
-                this.showFormErrors = false;
-            }
-        },
-        formErrors() {
-            this.showFormErrors = true;
         },
     },
+    created() {
+        this.init(this.value);
+    },
     methods: {
-        validate(scroll = false) {
-            this.errors = [];
-            if (this.input.required && this.localValue === null) {
-                this.errors.push('Please choose one option');
-            }
-            if (scroll && this.errors.length) {
-                this.$el.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                });
-            }
+        init(value) {
+            this.localValue = value || '';
         },
         preventWhenReadonly(event, option) {
             if (option.readonly) {
                 event.preventDefault();
             }
         },
-        change(value) {
-            this.showFormErrors = false;
+        change(ev, value) {
+            this.errors = [];
+            this.validateByEventType(ev.type);
+
             this.$emit('input', value);
+        },
+        click(value) {
+            this.$emit('click', value);
+        },
+        /**
+         * Used by FormItem plugin
+         */
+        validate() {
+            this.errors = [];
+
+            if (this.isRequired && this.isEmpty) {
+                this.errors.push(this.translate(this.requiredMessage));
+            }
         },
     },
 };

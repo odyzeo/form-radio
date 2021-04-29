@@ -2,7 +2,7 @@
     "name": "@odyzeo/form-radio",
     "version": "1.4.0",
     "description": "Odyzeo form radio component with Vue",
-    "main": "dist/form-radio.umd.js",
+    "main": "dist/form-radio.common.js",
     "keywords": [
         "odyzeo",
         "form",
@@ -32,17 +32,21 @@
         ".js"
     ],
     "dependencies": {
-        "normalize.css": "^8.0.1",
-        "vue": "^2.6.5"
+        "@odyzeo/form-item": "^2.5.0"
     },
     "devDependencies": {
-        "@vue/cli-plugin-babel": "^3.4.0",
-        "@vue/cli-plugin-eslint": "^3.4.0",
-        "@vue/cli-service": "^3.4.0",
-        "@vue/eslint-config-airbnb": "^4.0.0",
-        "less": "^3.9.0",
-        "less-loader": "^4.1.0",
-        "vue-template-compiler": "^2.6.5"
+        "@vue/cli-plugin-babel": "^4.5.12",
+        "@vue/cli-plugin-eslint": "^4.5.12",
+        "@vue/cli-service": "^4.5.12",
+        "@vue/eslint-config-airbnb": "^5.3.0",
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.25.0",
+        "eslint-plugin-vue": "^7.9.0",
+        "less": "^4.1.1",
+        "less-loader": "^7.3.0",
+        "normalize.css": "^8.0.1",
+        "vue": "^2.6.12",
+        "vue-template-compiler": "^2.6.12"
     },
     "eslintConfig": {
         "root": true,

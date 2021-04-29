@@ -11,9 +11,11 @@
             >
                 <h1>Which platform do you prefer?</h1>
                 <form-radio
-                    :input="radio"
                     v-model="radio.value"
+                    :input="radio"
                     :form-errors="formErrors[radio.name]"
+                    :group-name="$options.GROUP_NAME"
+                    @click="onClick"
                 >
                     <template #option="{ option }">
                         <span class="form-radio__text">
@@ -25,9 +27,17 @@
                 <p>
                     {{ radio.name }}: {{ radio.value }}
                 </p>
+                <p>Previous value: {{ previousValue }}</p>
 
                 <button class="btn-validate">
                     Send
+                </button>
+
+                <button
+                    class="btn-validate"
+                    @click.prevent="clear"
+                >
+                    Clear
                 </button>
             </form>
         </div>
@@ -38,6 +48,7 @@
 import FormRadio from './components/FormRadio';
 
 export default {
+    GROUP_NAME: 'group-name',
     name: 'App',
     components: {
         FormRadio,
@@ -45,14 +56,17 @@ export default {
     data() {
         return {
             formErrors: {},
+            previousValue: null,
             radio: {
                 name: 'platform',
                 required: true,
                 value: 'zeo',
+                validatorEvent: 'onInput',
                 options: [
                     {
                         value: 'ios',
                         name: 'iOS',
+                        className: 'text-bold',
                     },
                     {
                         value: 'android',
@@ -77,6 +91,12 @@ export default {
         };
     },
     methods: {
+        clear() {
+            this.$formItem.clear(this.$options.GROUP_NAME);
+        },
+        onClick() {
+            this.previousValue = this.radio.value;
+        },
         submit() {
             this.formErrors = {
                 platform: ['Are you sure?'],

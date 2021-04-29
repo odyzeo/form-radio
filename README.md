@@ -18,10 +18,15 @@ npm install --save @odyzeo/form-radio
 yarn add @odyzeo/form-radio
 ```
 
-Import component in your where you want to use it and register it:
+Import component in your where you want to use it and register it.
+Remember to also use FormItem plugin.
 
 ```
+import FormItem from '@odyzeo/form-item';
 import FormRadio from '@odyzeo/form-radio';
+
+Vue.use(FormItem);
+
 export default {
     components: {
         FormRadio,
@@ -95,21 +100,19 @@ export default {
 
 ## Props
 
+Since `FormRadio` extends `FormItem` see [@odyzeo/form-item](https://www.npmjs.com/package/@odyzeo/form-item) for props.
+
+Additional or overwritten props for `FormRadio`
+
 ### input - required
 | Property name | Type | Default value | Description |
 | ------------- | ---- | ------------- | ----------- |
 | `name` | string | | Input `name` attribute |
 | `required` | boolean | `false` | If value is required |
-| `options` | array | | Array of radio options [{ value: 'value', name: 'name', disabled: false }] |
+| `options` | array | | Array of radio options [{ value: 'value', name: 'name', disabled: false, className: 'custom-class-for-option' }] |
 
 ### field {string} - optional
 Name of option property. Default: `value`.
-
-### value {string} - optional
-This is the initial value of the form input radio.
-
-### formErrors {array} - optional
-Array of errors to display.
 
 ## Slots
 Using new slot syntax since 2.6.0+. [Check it out](https://vuejs.org/v2/guide/components-slots.html).
@@ -124,16 +127,12 @@ Using new slot syntax since 2.6.0+. [Check it out](https://vuejs.org/v2/guide/co
 ```
 
 ## Events
-Component emits 'input' event with value of the element
+Component emits these events:
+- `@input` - emits the value of the element
+- `@click` - emits the value of clicked option (useful when you want to deselect option)
 
 ## Development
 
 ```
 npm run serve
-```
-
-or
-
-```bash
-yarn serve
 ```
