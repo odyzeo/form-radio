@@ -3,6 +3,16 @@
     "version": "2.0.0",
     "description": "Odyzeo form radio component with Vue",
     "main": "dist/form-radio.common.js",
+    "module": "src/index.js",
+    "source": "src/components/FormRadio.vue",
+    "browser": "dist/form-radio.umd.min.js",
+    "style": "dist/form-radio.css",
+    "less": "src/less/form-radio.less",
+    "files": [
+        "dist/*",
+        "src/*",
+        "package.json"
+    ],
     "keywords": [
         "odyzeo",
         "form",
@@ -20,32 +30,29 @@
         "build-lib": "vue-cli-service build --target lib --name form-radio ./src/components/FormRadio.vue",
         "lint": "vue-cli-service lint"
     },
+    "peerDependencies": {
+        "vue": "^2.6.12"
+    },
     "repository": {
         "type": "git",
         "url": "https://github.com/odyzeo/form-radio.git"
     },
-    "files": [
-        "dist/*",
-        "src/*",
-        "public/*",
-        "*.json",
-        ".js"
-    ],
     "dependencies": {
         "@odyzeo/form-item": "^2.5.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.14.8",
+        "@babel/eslint-parser": "^7.14.7",
+        "@babel/eslint-plugin": "^7.14.5",
         "@vue/cli-plugin-babel": "^4.5.12",
         "@vue/cli-plugin-eslint": "^4.5.12",
         "@vue/cli-service": "^4.5.12",
         "@vue/eslint-config-airbnb": "^5.3.0",
-        "babel-eslint": "^10.1.0",
         "eslint": "^7.25.0",
         "eslint-plugin-vue": "^7.9.0",
         "less": "^4.1.1",
         "less-loader": "^7.3.0",
         "normalize.css": "^8.0.1",
-        "vue": "^2.6.12",
         "vue-template-compiler": "^2.6.12"
     },
     "eslintConfig": {
@@ -96,17 +103,10 @@
             ]
         },
         "parserOptions": {
-            "parser": "babel-eslint"
-        }
-    },
-    "postcss": {
-        "plugins": {
-            "autoprefixer": {}
+            "parser": "@babel/eslint-parser"
         }
     },
     "browserslist": [
-        "> 1%",
-        "last 2 versions",
-        "not ie <= 8"
+        "defaults"
     ]
 }
