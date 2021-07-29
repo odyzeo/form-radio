@@ -3,7 +3,7 @@
         :class="{
             'form-item--error': isErrors,
         }"
-        class="form-item"
+        class="form-item form-item--radio"
     >
         <label
             v-for="(option, key) in input.options"
