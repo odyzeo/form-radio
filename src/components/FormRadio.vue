@@ -1,21 +1,9 @@
 <template>
-    <div
-        :class="{
-            'form-item--error': isErrors,
-        }"
-        class="form-item form-item--radio"
-    >
+    <div :class="componentClassName">
         <label
             v-for="(option, key) in input.options"
             :key="`${input.name}_option_${key}`"
-            :class="{
-                [option.className]: option.className,
-                'form-item--error': isErrors,
-                'is-disabled': option.disabled,
-                'is-readonly': option.readonly,
-                'is-active': isActive(option),
-            }"
-            class="form-radio"
+            :class="getOptionClass(option)"
             @click="preventWhenReadonly($event, option)"
         >
             <input
@@ -26,18 +14,18 @@
                 :disabled="option.disabled"
                 :readonly="option.readonly"
                 type="radio"
-                class="form-radio__input"
+                :class="$options.CLASS_NAME.input"
                 @click="click(option[field])"
                 @change="change($event, option[field])"
             >
-            <span class="form-radio__element"></span>
+            <span :class="$options.CLASS_NAME.element"></span>
 
             <slot
                 :option="option"
                 name="option"
             >
                 <span
-                    class="form-radio__text"
+                    :class="$options.CLASS_NAME.text"
                     v-text="translate(option.name)"
                 ></span>
             </slot>
@@ -73,6 +61,12 @@ export default {
         };
     },
     computed: {
+        componentClassName() {
+            return {
+                [this.getClassName()]: true,
+                [this.getClassName(null, 'error')]: this.isErrors,
+            };
+        },
         isActive() {
             return (option) => this.localValue === option[this.field];
         },
@@ -93,10 +87,39 @@ export default {
     },
     created() {
         this.init(this.value);
+        this.initClassName();
     },
     methods: {
         init(value) {
             this.localValue = value || '';
+        },
+        initClassName() {
+            this.$options.CLASS_NAME = {
+                element: this.getClassName('element'),
+                input: this.getClassName('input'),
+                label: this.getClassName('label'),
+                text: this.getClassName('text'),
+            };
+        },
+        getClassName(element = null, modifier = null) {
+            let className = this.className ?? 'form-radio';
+            if (element) {
+                className = `${className}__${element}`;
+            }
+            if (modifier) {
+                className = `${className}--${modifier}`;
+            }
+            return className;
+        },
+        getOptionClass(option) {
+            return {
+                [option.className]: option.className,
+                [this.getClassName('label')]: true,
+                [this.getClassName('label', 'error')]: this.isErrors,
+                [this.getClassName('label', 'disabled')]: option.disabled,
+                [this.getClassName('label', 'readonly')]: option.readonly,
+                [this.getClassName('label', 'active')]: this.isActive(option),
+            };
         },
         preventWhenReadonly(event, option) {
             if (option.readonly) {

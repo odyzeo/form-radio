@@ -4,6 +4,9 @@
 @font-size--xsmall: 12px;
 
 .form-radio {
+}
+
+.form-radio__label {
     position: relative;
     display: block;
     cursor: pointer;
@@ -35,11 +38,7 @@
     opacity: 0;
 }
 
-
-.form-radio {
-
-    &.is-disabled,
-    &.is-readonly {
-        opacity: .4;
-    }
+.form-radio__label--disabled,
+.form-radio__label--readonly {
+    opacity: .4;
 }

@@ -11,7 +11,9 @@
             >
                 <h1>Which platform do you prefer?</h1>
                 <form-radio
+                    :key="className"
                     v-model="radio.value"
+                    :class-name="className"
                     :input="radio"
                     :form-errors="formErrors[radio.name]"
                     :group-name="$options.GROUP_NAME"
@@ -39,6 +41,13 @@
                 >
                     Clear
                 </button>
+
+                <button
+                    class="btn-validate"
+                    @click.prevent="toggleClassName"
+                >
+                    Toggle className
+                </button>
             </form>
         </div>
     </div>
@@ -55,6 +64,7 @@ export default {
     },
     data() {
         return {
+            className: null,
             formErrors: {},
             previousValue: null,
             radio: {
@@ -101,6 +111,9 @@ export default {
             this.formErrors = {
                 platform: ['Are you sure?'],
             };
+        },
+        toggleClassName() {
+            this.className = this.className === 'naked' ? null : 'naked';
         },
     },
 };
