@@ -3,7 +3,7 @@
     "version": "3.0.1",
     "description": "Odyzeo form radio component with Vue",
     "main": "dist/form-radio.common.js",
-    "module": "src/index.js",
+    "module": "src/components/FormRadio.vue",
     "source": "src/components/FormRadio.vue",
     "browser": "dist/form-radio.umd.min.js",
     "style": "dist/form-radio.css",
